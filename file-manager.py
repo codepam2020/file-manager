@@ -224,10 +224,12 @@ class Ui_MainWindow(object):
         self.pushButton_2.clicked.connect(self.name_change)
 
         # pdf 병합 관련 functions
-        self.pushButton_5.clicked.connect(self.up_PDF)
-        self.pushButton_6.clicked.connect(self.down_PDF)
-        self.pushButton_3.clicked.connect(self.add_PDF)
-        self.pushButton_4.clicked.connect(self.del_PDF)
+        self.pushButton_5.clicked.connect(self.move_up)
+        self.pushButton_6.clicked.connect(self.move_down)
+        self.pushButton_3.clicked.connect(self.file_add)
+        self.pushButton_4.clicked.connect(self.file_del)
+        self.pushButton_7.clicked.connect(self.file_save)
+        self.pushButton_8.clicked.connect(self.file_merge)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -766,6 +768,52 @@ class Ui_MainWindow(object):
             #     print(time.strftime("20%y_%m_%d", time.localtime(m_time)))
         except:
             print("error")
+
+    # pdf 병합 functions
+
+    def move_up(self):
+        file_row = self.listWidget_2.currentRow()
+        if file_row > 0:
+            item = self.listWidget_2.takeItem(file_row)
+            self.listWidget_2.insertItem(file_row - 1, item)
+            self.listWidget_2.setCurrentRow(file_row - 1)
+
+    def move_down(self):
+        file_row = self.listWidget_2.currentRow()
+        if file_row < self.listWidget_2.count() - 1:
+            item = self.listWidget_2.takeItem(file_row)
+            self.listWidget_2.insertItem(file_row + 1, item)
+            self.listWidget_2.setCurrentRow(file_row + 1)
+
+    def file_add(self):
+        file_name = QFileDialog.getOpenFileName(
+            None, "PDF 파일 불러오기", "", "pdf 파일 (*.pdf)"
+        )
+        self.listWidget_2.addItem(QListWidgetItem(file_name[0]))
+
+    def file_del(self):
+        self.listWidget_2.takeItem(self.listWidget_2.currentRow())
+
+    def file_save(self):
+        location = QFileDialog.getExistingDirectory(None)
+        self.listWidget_3.clear()
+        self.listWidget_3.addItem(QListWidgetItem(location))
+
+    def file_merge(self):
+
+        num = self.listWidget_2.count()
+        output = PdfFileWriter()
+
+        for x in range(0, num):
+            src = self.listWidget_2.item(x)
+            input = PdfFileReader(open(src.text(), "rb"))
+            for j in range(input.getNumPages()):
+                output.addPage(input.getPage(j))
+
+        dest = (self.listWidget_3.item(0)).text() + "\\Merged.pdf"
+        outstream = open(dest, "wb")
+        output.write(outstream)
+        outstream.close()
 
 
 if __name__ == "__main__":
