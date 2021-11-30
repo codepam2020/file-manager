@@ -17,7 +17,7 @@ import os
 import time
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QtWidgets.QMainWindow):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(630, 390)
@@ -256,7 +256,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "file manager"))
         self.comboBox.setItemText(0, _translate("MainWindow", "연도선택"))
         self.comboBox.setItemText(1, _translate("MainWindow", "YYYY"))
         self.comboBox.setItemText(2, _translate("MainWindow", "YY"))
@@ -333,6 +333,7 @@ class Ui_MainWindow(object):
             self.tabWidget.indexOf(self.tab), _translate("MainWindow", "정보")
         )
 
+    #! change file name functions
     # set folder for changing name
     def set_folder(self):
         folder = QtWidgets.QFileDialog.getExistingDirectory()
@@ -341,17 +342,20 @@ class Ui_MainWindow(object):
 
     # change file name function
     def name_change(self):
-        folder = self.listWidget.item(0).text()
-        file_list = os.listdir(folder)
-        date_date_word = self.textEdit.toPlainText()
-        head_word = self.textEdit_2.toPlainText()
-        tail_word = self.textEdit_3.toPlainText()
-        date_type = self.comboBox_2.currentText()
+        try:
+            folder = self.listWidget.item(0).text()
+            file_list = os.listdir(folder)
+            date_date_word = self.textEdit.toPlainText()
+            head_word = self.textEdit_2.toPlainText()
+            tail_word = self.textEdit_3.toPlainText()
+            date_type = self.comboBox_2.currentText()
+            year_type = self.comboBox.currentText()
+            QMessageBox.about(self, "manager", "변경되었습니다")
+        except:
+            QMessageBox.about(self, "manager", "폴더 경로를 선택하세요")
 
-        year_type = self.comboBox.currentText()
-        print(year_type)
-
-    # pdf concat function
+    #! pdf concat function
+    # pdf concat move up
     def move_up(self):
         file_row = self.listWidget_2.currentRow()
         if file_row > 0:
@@ -359,6 +363,7 @@ class Ui_MainWindow(object):
             self.listWidget_2.insertItem(file_row - 1, item)
             self.listWidget_2.setCurrentRow(file_row - 1)
 
+    # # pdf concat move down
     def move_down(self):
         file_row = self.listWidget_2.currentRow()
         if file_row < self.listWidget_2.count() - 1:
@@ -366,22 +371,28 @@ class Ui_MainWindow(object):
             self.listWidget_2.insertItem(file_row + 1, item)
             self.listWidget_2.setCurrentRow(file_row + 1)
 
+    # pdf concat file add
     def file_add(self):
-        file_name = QFileDialog.getOpenFileName(
+        file_name = QFileDialog.getOpenFileNames(
             None, "PDF 파일 불러오기", "", "pdf 파일 (*.pdf)"
         )
-        self.listWidget_2.addItem(QListWidgetItem(file_name[0]))
+        count = len(file_name[0])
 
+        for i in range(count):
+            self.listWidget_2.addItem(QListWidgetItem(file_name[0][i]))
+
+    # pdf concat file delete
     def file_del(self):
         self.listWidget_2.takeItem(self.listWidget_2.currentRow())
 
+    # pdf concat file save
     def file_save(self):
         location = QFileDialog.getExistingDirectory(None)
         self.listWidget_3.clear()
         self.listWidget_3.addItem(QListWidgetItem(location))
 
+    # pdf concat file merge
     def file_merge(self):
-
         num = self.listWidget_2.count()
         output = PdfFileWriter()
 
