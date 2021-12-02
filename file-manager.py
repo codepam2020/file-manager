@@ -350,9 +350,15 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             tail_word = self.textEdit_3.toPlainText()
             date_type = self.comboBox_2.currentText()
             year_type = self.comboBox.currentText()
-            QMessageBox.about(self, "manager", "변경되었습니다")
+            QMessageBox.about(self, ".", "변경되었습니다")
+
         except:
-            QMessageBox.about(self, "manager", "폴더 경로를 선택하세요")
+            date_date_word = self.textEdit.toPlainText()
+            head_word = self.textEdit_2.toPlainText()
+            tail_word = self.textEdit_3.toPlainText()
+            date_type = self.comboBox_2.currentText()
+            year_type = self.comboBox.currentText()
+            QMessageBox.about(self, ".", year_type)
 
     #! pdf concat function
     # pdf concat move up
