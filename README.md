@@ -1,5 +1,6 @@
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/codepam2020/file-manager">
-![GitHub top language](https://img.shields.io/github/languages/top/codepam2020/file-manager)
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/codepam2020/file-manager">
+
 
 # Product Name
 
@@ -12,7 +13,7 @@ file-manger
 
 file-manager.exe 를 다운받습니다
 
-## Usage example
+
 
 <!-- A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
 
@@ -22,9 +23,7 @@ _For more examples and usage, please refer to the [Wiki][wiki]._
 
 Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms. -->
 
-```sh //코드
 
-```
 
 ## Release History
 
