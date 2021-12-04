@@ -1,11 +1,11 @@
 [![NPM Version][npm-image]][npm-url]
-<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/jungsooYook/project_pharm">
-![GitHub top language](https://img.shields.io/github/languages/top/jungsooYook/project_pharm)
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/codepam2020/file-manager">
+![GitHub top language](https://img.shields.io/github/languages/top/codepam2020/file-manager)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/codepam2020/Drug-Information-App)
 
 # Product Name
 
-이게뭐약?
+file-manger
 
 # Product Information
 
