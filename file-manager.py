@@ -372,7 +372,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                         elif hour_selected == "HH시":
                             hour = time.strftime("%H시", time.localtime(date))
                         elif hour_selected == "HH시mm분":
-                            hour = time.strftime("%H시%M", time.localtime(date))
+                            hour = time.strftime("%H시%M분", time.localtime(date))
                         elif hour_selected == "HH시()mm분":
                             hour = time.strftime(
                                 "%H시{}%M분".format(date_date_word), time.localtime(date)
@@ -384,12 +384,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                         else:
                             word1 = ""
 
-                        if (not word1) and month and (day or hour):
+                        if month and (day or hour):
                             word2 = date_date_word
                         else:
                             word2 = ""
 
-                        if (not word2 or not word1) and day and hour:
+                        if day and hour:
                             word3 = date_date_word
                         else:
                             word3 = ""
