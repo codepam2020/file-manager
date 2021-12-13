@@ -11,7 +11,10 @@ file-manger
 
 ## Installation
 
-file-manager.exe 를 다운받습니다
+[다운로드](https://github.com/codepam2020/file-manager/blob/main/file-manager.exe)
+
+위 다운로드를 눌러 파일을 다운받습니다.
+그리고 간단히 실행만 시키면 됩니다
 
 
 
